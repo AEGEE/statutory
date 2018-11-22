@@ -13,12 +13,10 @@ services:
             POSTGRES_PASSWORD: postgres
     oms-statutory:
         build:
-            context: ./$PATH_OMS_STATUTORY/oms-statutory
-            dockerfile: ./Dockerfile.dev
+            context: ./$PATH_OMS_STATUTORY/..
         image: aegee/oms-statutory:dev
         volumes:
             - oms-statutory-media:/usr/app/media
-            - ./$PATH_OMS_STATUTORY/../:/usr/app/src
             - shared:/usr/app/shared:ro
         links:
             - postgres-oms-statutory
