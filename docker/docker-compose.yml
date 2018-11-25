@@ -4,6 +4,7 @@ version: '3.2'
 services:
     postgres-oms-statutory:
         image: postgres:10.6
+        restart: always
         volumes:
             - postgres:/var/lib/postgresql/data
         expose:
@@ -15,6 +16,7 @@ services:
         build:
             context: ./$PATH_OMS_STATUTORY/..
         image: aegee/oms-statutory:dev
+        restart: on-failure
         volumes:
             - oms-statutory-media:/usr/app/media
             - shared:/usr/app/shared:ro
