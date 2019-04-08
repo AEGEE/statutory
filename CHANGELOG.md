@@ -1,3 +1,12 @@
+## [0.9.2](https://github.com/AEGEE/oms-statutory/compare/0.9.1...0.9.2) (2019-04-08)
+
+
+### Bug Fixes
+
+* **candidates:** not allowing candidates to edit application after ddl ([86196f9](https://github.com/AEGEE/oms-statutory/commit/86196f9))
+
+
+
 ## [0.9.1](https://github.com/AEGEE/oms-statutory/compare/0.9.0...0.9.1) (2019-03-31)
 
 
