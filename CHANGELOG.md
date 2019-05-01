@@ -1,3 +1,67 @@
+## [0.10.5](https://github.com/AEGEE/oms-statutory/compare/0.10.4...0.10.5) (2019-04-29)
+
+
+### Bug Fixes
+
+* **memberslist:** allow managing memberslist for board till event starts ([ea12ae1](https://github.com/AEGEE/oms-statutory/commit/ea12ae1))
+
+
+
+## [0.10.4](https://github.com/AEGEE/oms-statutory/compare/0.10.3...0.10.4) (2019-04-29)
+
+
+### Bug Fixes
+
+* **statutory:** fixed zero delegates displaying in attendance stats ([e03f9b4](https://github.com/AEGEE/oms-statutory/commit/e03f9b4))
+
+
+
+## [0.10.3](https://github.com/AEGEE/oms-statutory/compare/0.10.2...0.10.3) (2019-04-29)
+
+
+### Bug Fixes
+
+* **statutory:** display local attendance. Fixes MEMB-492 ([bae0a00](https://github.com/AEGEE/oms-statutory/commit/bae0a00))
+
+
+
+## [0.10.2](https://github.com/AEGEE/oms-statutory/compare/0.10.1...0.10.2) (2019-04-28)
+
+
+### Bug Fixes
+
+* **limits:** added SPM for pax limits ([425eb67](https://github.com/AEGEE/oms-statutory/commit/425eb67))
+* **statutory:** allow SPM for pax limits ([7fef261](https://github.com/AEGEE/oms-statutory/commit/7fef261))
+
+
+
+## [0.10.1](https://github.com/AEGEE/oms-statutory/compare/0.10.0...0.10.1) (2019-04-28)
+
+
+### Bug Fixes
+
+* **test:** added SPM displaying test ([dec500a](https://github.com/AEGEE/oms-statutory/commit/dec500a))
+
+
+
+# [0.10.0](https://github.com/AEGEE/oms-statutory/compare/0.9.12...0.10.0) (2019-04-28)
+
+
+### Features
+
+* **statutory:** added SPM as event type ([9769d07](https://github.com/AEGEE/oms-statutory/commit/9769d07))
+
+
+
+## [0.9.12](https://github.com/AEGEE/oms-statutory/compare/0.9.11...0.9.12) (2019-04-28)
+
+
+### Bug Fixes
+
+* **statutory:** fix fee to AEGEE-Europe calculation. Fixes HELP-511 ([ebcce5e](https://github.com/AEGEE/oms-statutory/commit/ebcce5e))
+
+
+
 ## [0.9.11](https://github.com/AEGEE/oms-statutory/compare/0.9.10...0.9.11) (2019-04-23)
 
 

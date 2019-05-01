@@ -214,14 +214,14 @@ const Event = sequelize.define('event', {
         }
     },
     type: {
-        type: Sequelize.ENUM('agora', 'epm'),
+        type: Sequelize.ENUM('agora', 'epm', 'spm'),
         allowNull: false,
         defaultValue: '',
         validate: {
             notEmpty: { msg: 'Event type should be set.' },
             isIn: {
-                args: [['agora', 'epm']],
-                msg: 'Event type should be one of these: "agora", "epm".'
+                args: [['agora', 'epm', 'spm']],
+                msg: 'Event type should be one of these: "agora", "epm", "spm".'
             }
         }
     },
@@ -235,6 +235,12 @@ const Event = sequelize.define('event', {
         type: Sequelize.VIRTUAL,
         get() {
             return moment().isBetween(this.application_period_starts, this.board_approve_deadline, null, '[]'); // inclusive
+        }
+    },
+    can_manage_memberslists: {
+        type: Sequelize.VIRTUAL,
+        get() {
+            return moment().isBetween(this.application_period_starts, this.starts, null, '[]'); // inclusive
         }
     },
     can_see_participants_list: {
