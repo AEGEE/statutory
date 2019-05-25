@@ -1,6 +1,5 @@
 version: '3.2'
 ### OMS STATUTORY     #######################################
-### mongodb Container #######################################
 services:
     postgres-oms-statutory:
         restart: always
@@ -18,7 +17,7 @@ services:
         build:
             context: ./$PATH_OMS_STATUTORY/oms-statutory
             dockerfile: ./Dockerfile.dev
-        image: aegee/oms-statutory:dev
+        image: aegee/oms-statutory
         volumes:
             - oms-statutory-media:/usr/app/media
             - ./$PATH_OMS_STATUTORY/../:/usr/app/src
