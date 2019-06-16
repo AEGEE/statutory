@@ -4,6 +4,7 @@
   "description": "Statutory events module for OMS",
   "main": "lib/server.js",
   "scripts": {
+    "start": "node lib/server.js",
     "lint": "eslint .",
     "db:create": "sequelize db:create",
     "db:setup": "sequelize db:drop; sequelize db:create; sequelize db:migrate",

@@ -4,19 +4,20 @@ RUN mkdir -p /usr/app/src \
 	&& mkdir -p /usr/app/media \
 	&& mkdir -p /usr/app/scripts
 
-ADD ./bootstrap.sh /usr/app/scripts/bootstrap.sh
-
-RUN chown -R node:node /usr/app
+COPY ./docker/oms-statutory/bootstrap.sh /usr/app/scripts/bootstrap.sh
+COPY ./ /usr/app/src
 
 WORKDIR /usr/app/src
+
+RUN chown -R node:node /usr/app
 
 USER node
 
 ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
 ENV PATH="/home/node/.npm-global/bin:${PATH}"
 
-RUN npm install -g --loglevel warn nodemon && npm cache clean --force
+RUN npm install --loglevel warn
 
-CMD sh /usr/app/scripts/bootstrap.sh && nodemon -e "js,json" lib/run.js
+CMD sh /usr/app/scripts/bootstrap.sh && npm start
 
 EXPOSE 8084
