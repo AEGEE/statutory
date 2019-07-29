@@ -1,0 +1,40 @@
+version: 2
+jobs:
+  test:
+    machine:
+      image: ubuntu-1604:201903-01
+    environment:
+      PATH_OMS_STATUTORY: .
+    steps:
+      - checkout
+      - run: chmod 777 -R .
+      - run: docker run --expose 5432 -e POSTGRES_PASSWORD=5ecr3t -d postgres
+      - run: docker ps
+      - run: docker-compose -f docker/docker-compose.yml run oms-statutory sh -c 'ls -la && whoami && /usr/app/scripts/bootstrap.sh && npm install && ls -la && whoami && npm test'
+  lint:
+    machine:
+      image: ubuntu-1604:201903-01
+    steps:
+      - checkout
+      - run: cp config/index.js.example config/index.js
+      - run: npm install
+      - run: npm run lint
+  audit:
+    machine:
+      image: ubuntu-1604:201903-01
+    steps:
+      - checkout
+      - run: npm audit
+
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - test
+  # lint:
+  #   jobs:
+  #     - lint
+  # audit:
+  #   jobs:
+  #     - audit
