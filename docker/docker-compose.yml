@@ -12,6 +12,7 @@ services:
         environment:
             POSTGRES_USER: postgres
             POSTGRES_PASSWORD: ${PW_POSTGRES}
+
     oms-statutory:
         restart: always
         build:
@@ -29,6 +30,12 @@ services:
         environment:
             BUGSNAG_KEY: a7dfed96a71033eca7f4469e8f88878b
             PG_PASSWORD: ${PW_POSTGRES}
+        healthcheck:
+            test: ["CMD", "curl", "--fail", "http://localhost/healthcheck"]
+            interval: 30s
+            timeout: 10s
+            retries: 3
+            start_period: 40s
         labels:
             - "traefik.backend=oms-statutory"
             - "traefik.port=8084"
@@ -43,3 +50,8 @@ volumes:
         driver: "local"
     shared:
         driver: "local"
+
+networks:
+    default:
+        external:
+            name: OMS
