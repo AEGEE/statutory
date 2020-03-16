@@ -42,7 +42,7 @@ describe('Events participating', () => {
 
     test('should display all published events you applied to', async () => {
         const event = await generator.createEvent({ status: 'published' });
-        const application = await generator.createApplication({ user_id: regularUser.id }, event);
+        await generator.createApplication({ user_id: regularUser.id }, event);
 
         const res = await request({
             uri: '/mine',
