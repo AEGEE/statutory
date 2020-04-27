@@ -20,6 +20,13 @@ const Position = sequelize.define('position', {
             notEmpty: { msg: 'Position name should be set.' },
         }
     },
+    body_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        validate: {
+            notEmpty: { msg: 'Associated body should be set.' },
+        }
+    },
     starts: {
         type: Sequelize.DATE,
         allowNull: false,
