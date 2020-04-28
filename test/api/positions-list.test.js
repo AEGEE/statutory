@@ -182,7 +182,7 @@ describe('Positions listing', () => {
             headers: { 'X-Auth-Token': 'blablabla' }
         });
 
-        expect(res.statusCode).toEqual(200;
+        expect(res.statusCode).toEqual(200);
         expect(res.body.success).toEqual(true);
         expect(res.body).not.toHaveProperty('errors');
         expect(res.body).toHaveProperty('data');

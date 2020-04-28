@@ -15,7 +15,7 @@ const Position = sequelize.define('position', {
     deleted: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
-        defaultValue: '0',
+        defaultValue: false,
         validate: {
             notEmpty: { msg: 'Deleted should be set.' }
         },
@@ -30,10 +30,7 @@ const Position = sequelize.define('position', {
     },
     body_id: {
         type: Sequelize.INTEGER,
-        allowNull: false,
-        validate: {
-            notEmpty: { msg: 'Associated body should be set.' },
-        }
+        allowNull: true,
     },
     starts: {
         type: Sequelize.DATE,
