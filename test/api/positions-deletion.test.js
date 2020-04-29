@@ -1,5 +1,3 @@
-const moment = require('moment');
-
 const { startServer, stopServer } = require('../../lib/server.js');
 const { request } = require('../scripts/helpers');
 const mock = require('../scripts/mock-core-registry');
@@ -32,7 +30,6 @@ describe('Positions deletion', () => {
         const res = await request({
             uri: '/events/' + event.id + '/positions/' + position.id,
             method: 'DELETE',
-            body: position,
             headers: { 'X-Auth-Token': 'blablabla' }
         });
 
@@ -50,7 +47,6 @@ describe('Positions deletion', () => {
         const res = await request({
             uri: '/events/' + event.id + '/positions/1337',
             method: 'DELETE',
-            body: position,
             headers: { 'X-Auth-Token': 'blablabla' }
         });
 
@@ -67,7 +63,6 @@ describe('Positions deletion', () => {
         const res = await request({
             uri: '/events/' + event.id + '/positions/NaN',
             method: 'DELETE',
-            body: position,
             headers: { 'X-Auth-Token': 'blablabla' }
         });
 
@@ -78,21 +73,19 @@ describe('Positions deletion', () => {
     });
 
     test('should succeed if everything\'s okay', async () => {
-      const event = await generator.createEvent({ type: 'agora', applications: [] });
-      const position = generator.generatePosition({});
+        const event = await generator.createEvent({ type: 'agora', applications: [] });
+        const position = generator.generatePosition({});
 
-      const res = await request({
-          uri: '/events/' + event.id + '/positions/' + position.id,
-          method: 'DELETE',
-          body: position,
-          headers: { 'X-Auth-Token': 'blablabla' }
-      });
+        const res = await request({
+            uri: '/events/' + event.id + '/positions/' + position.id,
+            method: 'DELETE',
+            headers: { 'X-Auth-Token': 'blablabla' }
+        });
 
-      expect(res.statusCode).toEqual(200);
-      expect(res.body.success).toEqual(true);
-      expect(res.body).not.toHaveProperty('errors');
-      expect(res.body).toHaveProperty('data');
-      expect(res.body.data.deleted).toEqual(false);
+        expect(res.statusCode).toEqual(200);
+        expect(res.body.success).toEqual(true);
+        expect(res.body).not.toHaveProperty('errors');
+        expect(res.body).toHaveProperty('data');
+        expect(res.body.data.deleted).toEqual(true);
     });
-
 });
