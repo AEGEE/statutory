@@ -177,7 +177,7 @@ describe('Positions listing', () => {
         }, event);
 
         const res = await request({
-            uri: '/events/'  + event.id + '/positions/all',
+            uri: '/events/' + event.id + '/positions/all',
             method: 'GET',
             headers: { 'X-Auth-Token': 'blablabla' }
         });
