@@ -74,7 +74,7 @@ describe('Positions deletion', () => {
 
     test('should succeed if everything\'s okay', async () => {
         const event = await generator.createEvent({ type: 'agora', applications: [] });
-        const position = await generator.generatePosition({}, event);
+        const position = await generator.createPosition({}, event);
 
         const res = await request({
             uri: '/events/' + event.id + '/positions/' + position.id,
