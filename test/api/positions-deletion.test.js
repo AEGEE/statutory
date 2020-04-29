@@ -79,6 +79,7 @@ describe('Positions deletion', () => {
         const res = await request({
             uri: '/events/' + event.id + '/positions/' + position.id,
             method: 'DELETE',
+            body: position,
             headers: { 'X-Auth-Token': 'blablabla' }
         });
 
