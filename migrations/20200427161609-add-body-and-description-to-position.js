@@ -4,5 +4,5 @@ module.exports = {
         'body_id',
         { type: Sequelize.INTEGER, allowNull: true }
     ),
-    down: queryInterface => queryInterface.removeColumn('postiions', 'body')
+    down: queryInterface => queryInterface.removeColumn('positions', 'body_id')
 };
