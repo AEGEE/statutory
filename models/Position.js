@@ -30,7 +30,7 @@ const Position = sequelize.define('position', {
     },
     body_id: {
         type: Sequelize.INTEGER,
-        allowNull: true,
+        allowNull: true
     },
     starts: {
         type: Sequelize.DATE,
