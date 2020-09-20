@@ -12,7 +12,7 @@ module.exports = {
             { type: Sequelize.STRING, allowNull: false, defaultValue: '' }
         );
     },
-    down: async queryInterface => {
+    down: async (queryInterface) => {
         await queryInterface.removeColumn('positions', 'start_term');
         await queryInterface.removeColumn('positions', 'end_term');
     }

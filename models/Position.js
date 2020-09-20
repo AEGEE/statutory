@@ -33,21 +33,21 @@ const Position = sequelize.define('position', {
         allowNull: true
     },
     start_term: {
-      type: Sequelize.DATEONLY,
-      allowNull: false,
-      defaultValue: Sequelize.NOW,
-      validate: {
-          notEmpty: { msg: 'Position start term date should be set.' },
-          isDate: { msg: 'Position start term date should be valid.' }
-      }
+        type: Sequelize.DATEONLY,
+        allowNull: false,
+        defaultValue: Sequelize.NOW,
+        validate: {
+            notEmpty: { msg: 'Position start term date should be set.' },
+            isDate: { msg: 'Position start term date should be valid.' }
+          }
     },
     end_term: {
-      type: Sequelize.STRING,
-      allowNull: false,
-      defaultValue: '',
-      validate: {
-        notEmpty: { msg: 'Posistion end term date should be set.' }
-      }
+        type: Sequelize.STRING,
+        allowNull: false,
+        defaultValue: '',
+        validate: {
+          notEmpty: { msg: 'Posistion end term date should be set.' }
+        }
     },
     starts: {
         type: Sequelize.DATE,
