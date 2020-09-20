@@ -151,7 +151,7 @@ exports.generatePosition = (options = {}, event = null) => {
     if (notSet(options.ends_force)) options.ends_force = faker.date.future(null, options.ends);
     if (notSet(options.deleted)) options.deleted = false;
     if (notSet(options.start_term)) options.start_term = faker.date.future(null, options.ends_force);
-    if (notSet(options.end_term)) options.end_term = faker.date.future(null, options.start_term);
+    if (notSet(options.end_term)) options.end_term = faker.lorem.sentence();
 
 
     if (event && event.id) {
