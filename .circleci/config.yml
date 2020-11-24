@@ -16,9 +16,7 @@ jobs:
             sudo apt-get install -y nodejs
             echo 'export PATH=/usr/bin:$PATH' >> $BASH_ENV
             which node && node -v
-      - node/install-packages:
-          cache-path: ~/node-modules
-          override-ci-command: npm install
+      - node/install-packages
       - run: mkdir -p ~/reports/jest
       - run:
           name: Run tests
@@ -39,9 +37,7 @@ jobs:
       - image: cimg/node:14.15
     steps:
       - checkout
-      - node/install-packages:
-          cache-path: ~/node-modules
-          override-ci-command: npm install
+      - node/install-packages
       - run: mkdir -p ~/reports
       - run: npm run lint -- --format junit --output-file ~/reports/eslint.xml
       - store_test_results:
@@ -60,9 +56,7 @@ jobs:
       - image: cimg/node:14.15
     steps:
       - checkout
-      - node/install-packages:
-          cache-path: ~/node-modules
-          override-ci-command: npm install
+      - node/install-packages
       - run: npx semantic-release
       - run: docker build  --tag aegee/statutory:$(node -p "require('./package.json').version") --tag aegee/statutory:latest -f docker/statutory/Dockerfile .
       - run: docker login --username $DOCKER_LOGIN --password $DOCKER_PASSWORD
