@@ -9,7 +9,13 @@ jobs:
     steps:
       - checkout
       - run: docker run --name postgres -e POSTGRES_PASSWORD='5ecr3t' -p 5432:5432 -d postgres:13
-      - node/install
+      - run:
+          name: Install Node
+          command: |
+            curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+            sudo apt-get install -y nodejs
+            echo 'export PATH=/usr/bin:$PATH' >> $BASH_ENV
+            which node && node -v
       - node/install-packages:
           cache-path: ~/node-modules
           override-ci-command: npm install
