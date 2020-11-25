@@ -27,10 +27,12 @@ jobs:
       - store_artifacts:
           path: ~/reports
   build:
-    machine:
-      image: ubuntu-2004:202010-01
+    docker:
+      - image: cimg/base:2020.11
     steps:
       - checkout
+      - setup_remote_docker:
+          version: 19.03.13
       - run: docker-compose -f docker/docker-compose.yml -f docker/docker-compose.dev.yml build --no-cache statutory
   eslint:
     docker:
@@ -52,10 +54,12 @@ jobs:
       - run: pip install yamllint
       - run: yamllint -d .yamllint.yml .
   docker-build-and-push:
-    machine:
-      image: ubuntu-2004:202010-01
+    docker:
+      - image: cimg/node:14.15
     steps:
       - checkout
+      - setup_remote_docker:
+          version: 19.03.13
       - node/install-packages
       - run: npx semantic-release
       - run: docker build  --tag aegee/statutory:$(node -p "require('./package.json').version") --tag aegee/statutory:latest -f docker/statutory/Dockerfile .
