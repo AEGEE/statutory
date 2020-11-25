@@ -89,4 +89,7 @@ workflows:
               ignore: master
   docker-build-and-push:
     jobs:
-      - docker-build-and-push
+      - docker-build-and-push:
+          filters:
+            branches:
+              only: master
