@@ -4,18 +4,13 @@ orbs:
 version: 2.1
 jobs:
   test:
-    machine:
-      image: ubuntu-2004:202010-01
+    docker:
+      - image: cimg/node:14.15
     steps:
       - checkout
+      - setup_remote_docker:
+          version: 19.03.13
       - run: docker run --name postgres -e POSTGRES_PASSWORD='5ecr3t' -p 5432:5432 -d postgres:13
-      - run:
-          name: Install Node
-          command: |
-            curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-            sudo apt-get install -y nodejs
-            echo 'export PATH=/usr/bin:$PATH' >> $BASH_ENV
-            which node && node -v
       - node/install-packages
       - run: mkdir -p ~/reports/jest
       - run:
