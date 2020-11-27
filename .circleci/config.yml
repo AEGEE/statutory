@@ -10,7 +10,8 @@ jobs:
       - checkout
       - run: docker run --name postgres -e POSTGRES_PASSWORD='5ecr3t' -p 5432:5432 -d postgres:13
       - run: |
-            echo 'export PATH=/usr/bin:$PATH' >> $BASH_ENV
+            echo 'export NVM_DIR="/opt/circleci/.nvm"' >> $BASH_ENV
+            echo ' [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
       - node/install:
           node-version: 14.15.1
       - node/install-packages
