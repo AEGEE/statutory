@@ -12,8 +12,14 @@ jobs:
       - run: |
             echo 'export NVM_DIR="/opt/circleci/.nvm"' >> $BASH_ENV
             echo ' [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
-      - node/install:
-          node-version: 14.15.1
+      - run: |
+          node -v
+      - run: |
+          nvm install v14.15.1
+          node -v
+          nvm alias default v14.15.1
+      - run: |
+          node -v
       - node/install-packages
       - run: mkdir -p ~/reports/jest
       - run:
