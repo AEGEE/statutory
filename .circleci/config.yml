@@ -84,6 +84,13 @@ workflows:
   test:
     jobs:
       - test
+  linters:
+    jobs:
+      - eslint
+      - yamllint
+      - shellcheck
+      - docker/hadolint:
+          dockerfiles: $(find . -name '*Dockerfile*')
   eslint:
     jobs:
       - eslint

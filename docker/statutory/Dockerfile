@@ -5,7 +5,7 @@ RUN mkdir -p /usr/app/src \
 	&& mkdir -p /usr/app/scripts
 
 RUN apt-get update \
- && apt-get install -y --no-install-recommends netcat=1.206-1ubuntu1 \
+ && apt-get install -y --no-install-recommends netcat=1.10-41 \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
