@@ -96,7 +96,7 @@ workflows:
   lint-dockerfile:
     jobs:
       - docker/hadolint:
-          dockerfiles: $(find . -name '*Dockerfile*')
+          dockerfiles: /docker/statutory/Dockerfile
   build:
     jobs:
       - build:
