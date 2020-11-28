@@ -31,9 +31,6 @@ jobs:
   build:
     docker:
       - image: cimg/base:2020.11
-        auth:
-          username: $DOCKER_LOGIN
-          password: $DOCKER_PASSWORD
     steps:
       - checkout
       - setup_remote_docker:
@@ -42,9 +39,6 @@ jobs:
   eslint:
     docker:
       - image: cimg/node:14.15
-        auth:
-          username: $DOCKER_LOGIN
-          password: $DOCKER_PASSWORD
     steps:
       - checkout
       - node/install-packages
@@ -57,9 +51,6 @@ jobs:
   yamllint:
     docker:
       - image: cimg/python:3.9.0
-        auth:
-          username: $DOCKER_LOGIN
-          password: $DOCKER_PASSWORD
     steps:
       - checkout
       - run: pip install yamllint
@@ -67,9 +58,6 @@ jobs:
   shellcheck:
     docker:
       - image: cimg/base:2020.11
-        auth:
-          username: $DOCKER_LOGIN
-          password: $DOCKER_PASSWORD
     steps:
       - checkout
       - shellcheck/install
@@ -77,9 +65,6 @@ jobs:
   docker-build-and-push:
     docker:
       - image: cimg/node:14.15
-        auth:
-          username: $DOCKER_LOGIN
-          password: $DOCKER_PASSWORD
     steps:
       - checkout
       - setup_remote_docker:
