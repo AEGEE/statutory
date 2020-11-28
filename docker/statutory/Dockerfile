@@ -4,8 +4,10 @@ RUN mkdir -p /usr/app/src \
 	&& mkdir -p /usr/app/media \
 	&& mkdir -p /usr/app/scripts
 
-RUN apt-get update
-RUN apt-get install netcat -y
+RUN apt-get update \
+ && apt-get install -y --no-install-recomments netcat=1.206-1ubuntu1 \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
 
 COPY ./docker/statutory/bootstrap.sh /usr/app/scripts/bootstrap.sh
 COPY ./docker/statutory/wait.sh /usr/app/scripts/wait.sh
@@ -20,9 +22,8 @@ USER node
 ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
 ENV PATH="/home/node/.npm-global/bin:${PATH}"
 
-RUN npm install -g --loglevel warn nodemon bunyan && npm cache clean --force
-RUN npm install --loglevel warn
+RUN npm install
 
-CMD sh /usr/app/scripts/bootstrap.sh && nodemon -e "js,json" lib/run.js
+CMD ["sh /usr/app/scripts/bootstrap.sh && nodemon -e 'js,json' lib/run.js"]
 
 EXPOSE 8084
