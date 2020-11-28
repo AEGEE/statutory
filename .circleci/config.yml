@@ -97,6 +97,9 @@ workflows:
       - shellcheck
       - docker/hadolint:
           dockerfiles: $(find . -name '*Dockerfile*')
+  audit:
+    jobs:
+      - audit
   build:
     jobs:
       - build:
