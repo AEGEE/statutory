@@ -68,6 +68,9 @@ jobs:
     steps:
       - checkout
       - run: npm audit
+      - slack/status:
+          fail_only: true
+          failure_message: The audit check for \`$CIRCLE_PROJECT_REPONAME\` has failed.
   docker-build-and-push:
     docker:
       - image: cimg/node:14.15
