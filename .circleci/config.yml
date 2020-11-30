@@ -110,8 +110,11 @@ workflows:
             branches:
               only: master
   audit:
-    jobs:
-      - audit:
+    triggers:
+      - schedule:
+          cron: "0 0 * * 4"
           filters:
             branches:
               only: master
+    jobs:
+      - audit
