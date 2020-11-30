@@ -87,9 +87,6 @@ jobs:
 
 workflows:
   version: 2
-  test:
-    jobs:
-      - test
   linters:
     jobs:
       - eslint
@@ -97,18 +94,24 @@ workflows:
       - shellcheck
       - docker/hadolint:
           dockerfiles: $(find . -name '*Dockerfile*')
-  audit:
-    jobs:
-      - audit
   build:
     jobs:
       - build:
           filters:
             branches:
               ignore: master
+  test:
+    jobs:
+      - test
   docker-build-and-push:
     jobs:
       - docker-build-and-push:
+          filters:
+            branches:
+              only: master
+  audit:
+    jobs:
+      - audit:
           filters:
             branches:
               only: master
