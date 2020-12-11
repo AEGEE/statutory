@@ -18,11 +18,7 @@
     "collectCoverage": true,
     "collectCoverageFrom": [
       "lib/**/*.js",
-      "models/**/*.js",
-      "!lib/run.js",
-      "!lib/sequelize.js",
-      "!lib/logger.js",
-      "!lib/fs.js"
+      "models/**/*.js"
     ],
     "reporters": [
       "default",
