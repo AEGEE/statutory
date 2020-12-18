@@ -49,8 +49,11 @@
     "bunyan": "^1.8.15",
 =======
     "bunyan": "^1.8.14",
+<<<<<<< master
 >>>>>>> chore(npm): remove old bugsnag
     "deep-assign": "^3.0.0",
+=======
+>>>>>>> chore(deps): remove deep-assign and use lodash.merge
     "express": "^4.17.1",
     "express-promise-router": "^4.0.1",
     "express-query-boolean": "^2.0.0",
