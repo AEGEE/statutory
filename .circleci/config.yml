@@ -67,7 +67,7 @@ jobs:
       - image: cimg/node:14.15
     steps:
       - checkout
-      - run: npm audit
+      - run: npm audit --production
       - slack/status:
           fail_only: true
           failure_message: The audit check for \`$CIRCLE_PROJECT_REPONAME\` has failed.
@@ -115,7 +115,7 @@ workflows:
   audit:
     triggers:
       - schedule:
-          cron: "0 0 * * 4"
+          cron: "0 0 * * 5"
           filters:
             branches:
               only: master
