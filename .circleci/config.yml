@@ -34,7 +34,7 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker:
-          version: 20.10.3
+          version: 20.10.2
       - run: docker-compose -f docker/docker-compose.yml -f docker/docker-compose.dev.yml build --no-cache statutory
   eslint:
     docker:
@@ -77,7 +77,7 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker:
-          version: 20.10.3
+          version: 20.10.2
       - node/install-packages
       - run: npx semantic-release
       - run: docker build  --tag aegee/statutory:$(node -p "require('./package.json').version") --tag aegee/statutory:latest -f docker/statutory/Dockerfile .
