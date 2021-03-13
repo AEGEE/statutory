@@ -6,7 +6,6 @@ RUN mkdir -p /usr/app/src \
 	&& mkdir -p /usr/app/scripts
 
 COPY ./docker/statutory/bootstrap.sh /usr/app/scripts/bootstrap.sh
-COPY ./docker/statutory/wait.sh /usr/app/scripts/wait.sh
 COPY . /usr/app/src
 
 RUN chown -R node:node /usr/app
