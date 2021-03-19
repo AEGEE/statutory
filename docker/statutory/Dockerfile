@@ -24,6 +24,6 @@ RUN npm cache clean --force
 RUN npm install
 
 # hadolint ignore=DL3025
-CMD /usr/app/scripts/bootstrap.sh && nodemon -e "js,json" lib/run.js
+CMD sh /usr/app/scripts/bootstrap.sh && nodemon -e "js,json" lib/run.js
 
 EXPOSE 8084
