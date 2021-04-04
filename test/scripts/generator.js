@@ -46,7 +46,7 @@ exports.generateEvent = (options = {}) => {
     if (notSet(options.ends)) options.ends = faker.date.future(null, options.starts);
     if (notSet(options.fee)) options.fee = faker.datatype.number({ min: 0, max: 100 });
     if (notSet(options.body_id)) options.body_id = faker.datatype.number(100);
-    if (notSet(options.type)) options.type = faker.datatype.arrayElement(['agora', 'epm']);
+    if (notSet(options.type)) options.type = faker.random.arrayElement(['agora', 'epm']);
 
     if (notSet(options.questions)) {
         const questionsCount = Math.round(Math.random() * 5) + 1; // from 1 to 6
