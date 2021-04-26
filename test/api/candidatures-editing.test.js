@@ -101,7 +101,7 @@ describe('Candidates editing', () => {
             starts: moment().subtract(1, 'week').toDate(),
             ends: moment().add(1, 'week').toDate(),
             candidates: [
-                generator.generateCandidate({ user_id: regularUser.id })
+                generator.generateCandidate({ user_id: regularUser.id, body_id: regularUser.bodies[0].id })
             ]
         }, event);
 
