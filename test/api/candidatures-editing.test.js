@@ -101,14 +101,14 @@ describe('Candidates editing', () => {
             starts: moment().subtract(1, 'week').toDate(),
             ends: moment().add(1, 'week').toDate(),
             candidates: [
-                generator.generateCandidate({ user_id: regularUser.id, body_id: regularUser.bodies[0].id })
+                generator.generateCandidate({ user_id: regularUser.id })
             ]
         }, event);
 
         const res = await request({
             uri: '/events/' + event.id + '/positions/' + position.id + '/candidates/' + position.candidates[0].id,
             method: 'PUT',
-            body: { first_name: 'Different' },
+            body: { first_name: 'Different', body_id: regularUser.bodies[0].id },
             headers: { 'X-Auth-Token': 'blablabla' }
         });
 
