@@ -225,7 +225,7 @@ describe('Cron testing', () => {
             await sleep(4000);
 
             const positionFromDb = await Position.findByPk(res.body.data.id);
-            expect(positionFromDb.status).toEqual('closed');
+            expect(positionFromDb.status).toEqual('open');
             expect(Object.keys(cron.jobs).length).toEqual(1); // closing
         });
 
