@@ -147,14 +147,14 @@ const Event = sequelize.define('event', {
                     throw new Error('Event is Agora, but the members list submission deadline is invalid.');
                 }
             },
-            laterThanApplicationEnd(val) {
-                if (val && moment(val).isSameOrBefore(this.application_period_ends)) {
-                    throw new Error('Members list submission deadline cannot be after or at the same time the aplication period ends.');
+            laterThanApplicationStart(val) {
+                if (val && moment(val).isSameOrBefore(this.application_period_starts)) {
+                    throw new Error('Members list submission deadline cannot be before or at the same time the aplication period starts.');
                 }
             },
             beforeEventStart(val) {
                 if (val && moment(val).isSameOrAfter(this.starts)) {
-                    throw new Error('Members list submission deadline cannot be before or at the same time the event starts.');
+                    throw new Error('Members list submission deadline cannot be after or at the same time the event starts.');
                 }
             }
         }
