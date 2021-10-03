@@ -134,7 +134,6 @@ const Event = sequelize.define('event', {
         allowNull: true,
         validate: {
             isValidForAgora(val) {
-                // console.log('test', val, this.type);
                 if (this.type !== 'agora') {
                     return;
                 }
