@@ -207,8 +207,8 @@ const Event = sequelize.define('event', {
                 }
             },
             afterDraftProposalDeadline(val) {
-                if (val && moment(val).isSameOrBefore(this.draft_proposal_deadline)) {
-                    throw new Error('Final proposal deadline cannot be before or at the same time the draft proposal deadline.');
+                if (val && moment(val).isBefore(this.draft_proposal_deadline)) {
+                    throw new Error('Final proposal deadline cannot be before the draft proposal deadline.');
                 }
             }
         }
@@ -284,8 +284,8 @@ const Event = sequelize.define('event', {
                 }
             },
             afterBookletPublicationDeadline(val) {
-                if (val && moment(val).isSameOrBefore(this.booklet_publication_deadline)) {
-                    throw new Error('Updated booklet publication deadline cannot be before or at the same time the booklet publication deadline.');
+                if (val && moment(val).isBefore(this.booklet_publication_deadline)) {
+                    throw new Error('Updated booklet publication deadline cannot be before the booklet publication deadline.');
                 }
             }
         }
