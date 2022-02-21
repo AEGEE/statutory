@@ -300,13 +300,9 @@ describe('Events listing', () => {
     });
 
     test('should return 403 if no permission on /?all=true', async () => {
-        const user = await generator.createUser();
-        const token = await generator.createAccessToken(user);
-
         const res = await request({
             uri: '/?all=true',
-            method: 'GET',
-            headers: { 'X-Auth-Token': token.value }
+            method: 'GET'
         });
 
         expect(res.statusCode).toEqual(403);
@@ -316,17 +312,13 @@ describe('Events listing', () => {
     });
 
     test('should filter draft events on /?all=true', async () => {
-        const user = await generator.createUser({ superadmin: true });
-        const token = await generator.createAccessToken(user);
-
         await generator.createPermission({ scope: 'global', action: 'view_unpublished', object: 'agora' });
 
         await generator.createEvent({ status: 'draft' });
 
         const res = await request({
             uri: '/?all=true',
-            method: 'GET',
-            headers: { 'X-Auth-Token': token.value }
+            method: 'GET'
         });
 
         expect(res.statusCode).toEqual(200);
