@@ -288,9 +288,15 @@ describe('Events listing', () => {
         expect(ids).toContain(second.id);
     });
     test('should return 401 if not authorized on /?all=true', async () => {
+        mock.mockAll({
+            core: { unauthorized: true },
+            mainPermissions: { unauthorized: true },
+            approvePermissions: { unauthorized: true },
+        });
         const res = await request({
             uri: '/?all=true',
-            method: 'GET'
+            method: 'GET',
+            headers: { 'X-Auth-Token': 'blablabla' }
         });
 
         expect(res.statusCode).toEqual(401);
@@ -302,7 +308,8 @@ describe('Events listing', () => {
     test('should return 403 if no permission on /?all=true', async () => {
         const res = await request({
             uri: '/?all=true',
-            method: 'GET'
+            method: 'GET',
+            headers: { 'X-Auth-Token': 'blablabla' }
         });
 
         expect(res.statusCode).toEqual(403);
@@ -312,13 +319,17 @@ describe('Events listing', () => {
     });
 
     test('should filter draft events on /?all=true', async () => {
-        await generator.createPermission({ scope: 'global', action: 'view_unpublished', object: 'agora' });
-
+        mock.mockAll({
+            core: { authorized: true },
+            mainPermissions: { authorized: true },
+            approvePermissions: { authorized: true },
+        });
         await generator.createEvent({ status: 'draft' });
 
         const res = await request({
             uri: '/?all=true',
-            method: 'GET'
+            method: 'GET',
+            headers: { 'X-Auth-Token': 'blablabla' }
         });
 
         expect(res.statusCode).toEqual(200);
