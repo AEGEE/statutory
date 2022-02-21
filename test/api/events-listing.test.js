@@ -287,4 +287,53 @@ describe('Events listing', () => {
         expect(ids).toContain(first.id);
         expect(ids).toContain(second.id);
     });
+    test('should return 401 if not authorized on /?all=true', async () => {
+        const res = await request({
+            uri: '/?all=true',
+            method: 'GET'
+        });
+
+        expect(res.statusCode).toEqual(401);
+        expect(res.body.success).toEqual(false);
+        expect(res.body).toHaveProperty('message');
+        expect(res.body).not.toHaveProperty('data');
+    });
+
+    test('should return 403 if no permission on /?all=true', async () => {
+        const user = await generator.createUser();
+        const token = await generator.createAccessToken(user);
+
+        const res = await request({
+            uri: '/?all=true',
+            method: 'GET',
+            headers: { 'X-Auth-Token': token.value }
+        });
+
+        expect(res.statusCode).toEqual(403);
+        expect(res.body.success).toEqual(false);
+        expect(res.body).toHaveProperty('message');
+        expect(res.body).not.toHaveProperty('data');
+    });
+
+    test('should filter draft events on /?all=true', async () => {
+        const user = await generator.createUser({ superadmin: true });
+        const token = await generator.createAccessToken(user);
+
+        await generator.createPermission({ scope: 'global', action: 'view_unpublished', object: 'agora' });
+
+        await generator.createEvent({ status: 'draft' });
+
+        const res = await request({
+            uri: '/?all=true',
+            method: 'GET',
+            headers: { 'X-Auth-Token': token.value }
+        });
+
+        expect(res.statusCode).toEqual(200);
+        expect(res.body.success).toEqual(true);
+        expect(res.body).toHaveProperty('data');
+        expect(res.body).toHaveProperty('meta');
+        expect(res.body).not.toHaveProperty('errors');
+        expect(res.body.data.length).toEqual(1);
+    });
 });
