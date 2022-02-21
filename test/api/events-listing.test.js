@@ -335,7 +335,6 @@ describe('Events listing', () => {
         expect(res.statusCode).toEqual(200);
         expect(res.body.success).toEqual(true);
         expect(res.body).toHaveProperty('data');
-        expect(res.body).toHaveProperty('meta');
         expect(res.body).not.toHaveProperty('errors');
         expect(res.body.data.length).toEqual(1);
     });
