@@ -289,7 +289,7 @@ describe('Events listing', () => {
     });
 
     test('should return 403 if no permission on /?all=true', async () => {
-        mock.mockAll({ core: { regularUser: true } });
+        mock.mockAll({ mainPermissions: { noPermissions: true } });
         const res = await request({
             uri: '/?all=true',
             method: 'GET',
