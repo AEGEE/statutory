@@ -308,6 +308,7 @@ describe('Events listing', () => {
             mainPermissions: { authorized: true },
             approvePermissions: { authorized: true },
         });
+
         await generator.createEvent({ status: 'draft' });
 
         const res = await request({

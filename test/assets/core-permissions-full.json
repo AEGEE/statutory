@@ -82,7 +82,17 @@
       "circles": null,
       "always_assigned": false,
       "action": "approve_members"
-    }, {
+    },  
+    {
+    "scope": "global",
+    "object": "agora",
+    "id": 56,
+    "filters": [],
+    "description": "Show Agora statutory draft events",
+    "combined": "global:show_unpublished:agora",
+    "circles": null,
+    "action": "show_unpublished"
+   },{
       "scope": "global",
       "object": "epm",
       "id": 66,
