@@ -289,18 +289,14 @@ describe('Events listing', () => {
     });
 
     test('should return 403 if no permission on /?all=true', async () => {
-        mock.mockAll({
-            core: { unauthorized: true },
-            mainPermissions: { unauthorized: true },
-            approvePermissions: { unauthorized: true },
-        });
+        mock.mockAll({ core: { regularUser: true } });
         const res = await request({
             uri: '/?all=true',
             method: 'GET',
             headers: { 'X-Auth-Token': 'blablabla' }
         });
 
-        expect(res.statusCode).toEqual(401);
+        expect(res.statusCode).toEqual(403);
         expect(res.body.success).toEqual(false);
         expect(res.body).toHaveProperty('message');
         expect(res.body).not.toHaveProperty('data');
