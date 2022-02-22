@@ -300,7 +300,7 @@ describe('Events listing', () => {
             headers: { 'X-Auth-Token': 'blablabla' }
         });
 
-        expect(res.statusCode).toEqual(403);
+        expect(res.statusCode).toEqual(401);
         expect(res.body.success).toEqual(false);
         expect(res.body).toHaveProperty('message');
         expect(res.body).not.toHaveProperty('data');
@@ -325,5 +325,26 @@ describe('Events listing', () => {
         expect(res.body).toHaveProperty('data');
         expect(res.body).not.toHaveProperty('errors');
         expect(res.body.data.length).toEqual(1);
+    });
+    test('should filter draft events and published on /?all=true', async () => {
+        mock.mockAll({
+            core: { authorized: true },
+            mainPermissions: { authorized: true },
+            approvePermissions: { authorized: true },
+        });
+        await generator.createEvent({ status: 'draft' });
+        await generator.createEvent({ status: 'published' });
+
+        const res = await request({
+            uri: '/?all=true',
+            method: 'GET',
+            headers: { 'X-Auth-Token': 'blablabla' }
+        });
+
+        expect(res.statusCode).toEqual(200);
+        expect(res.body.success).toEqual(true);
+        expect(res.body).toHaveProperty('data');
+        expect(res.body).not.toHaveProperty('errors');
+        expect(res.body.data.length).toEqual(2);
     });
 });
