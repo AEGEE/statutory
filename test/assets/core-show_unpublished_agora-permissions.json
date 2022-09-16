@@ -1,0 +1,15 @@
+{
+    "success": true,
+    "data": [
+        {
+            "scope": "global",
+            "object": "agora",
+            "id": 72,
+            "filters": [],
+            "description": "Show Agora statutory draft events",
+            "combined": "global:show_unpublished:agora",
+            "circles": null,
+            "action": "show_unpublished"
+        }
+    ]
+}

@@ -78,6 +78,27 @@ exports.mockCoreMainPermissions = (options) => {
             .replyWithFile(200, path.join(__dirname, '..', 'assets', 'core-empty.json'));
     }
 
+    if (options.onlyUnpublishedAgoraPermission) {
+        return nock(`${config.core.url}:${config.core.port}`)
+            .persist()
+            .get('/my_permissions')
+            .replyWithFile(200, path.join(__dirname, '..', 'assets', 'core-show_unpublished_agora-permissions.json'));
+    }
+
+    if (options.onlyUnpublishedEpmPermission) {
+        return nock(`${config.core.url}:${config.core.port}`)
+            .persist()
+            .get('/my_permissions')
+            .replyWithFile(200, path.join(__dirname, '..', 'assets', 'core-show_unpublished_epm-permissions.json'));
+    }
+
+    if (options.onlyUnpublishedSpmPermission) {
+        return nock(`${config.core.url}:${config.core.port}`)
+            .persist()
+            .get('/my_permissions')
+            .replyWithFile(200, path.join(__dirname, '..', 'assets', 'core-show_unpublished_spm-permissions.json'));
+    }
+
     return nock(`${config.core.url}:${config.core.port}`)
         .persist()
         .get('/my_permissions')

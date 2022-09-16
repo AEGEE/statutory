@@ -1,0 +1,15 @@
+{
+  "success": true,
+  "data": [
+    {
+      "scope": "global",
+      "object": "spm",
+      "id": 72,
+      "filters": [],
+      "description": "Show SPM statutory draft events",
+      "combined": "global:show_unpublished:spm",
+      "circles": null,
+      "action": "show_unpublished"
+    }
+  ]
+}

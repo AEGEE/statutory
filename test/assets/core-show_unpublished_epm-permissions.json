@@ -1,0 +1,15 @@
+{
+  "success": true,
+  "data": [
+    {
+      "scope": "global",
+      "object": "epm",
+      "id": 72,
+      "filters": [],
+      "description": "Show EPM statutory draft events",
+      "combined": "global:show_unpublished:epm",
+      "circles": null,
+      "action": "show_unpublished"
+    }
+  ]
+}
