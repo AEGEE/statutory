@@ -449,7 +449,7 @@ Application.findWithParams = ({ where, attributes, query }) => {
 
 Application.beforeValidate((application) => {
     // TODO: create an option to set that meat-eaters are not allowed for an event
-    if (application.event_id === 23 && application.meals === 'meat-eater') {
+    if (application.event_id === 23 && application.meals === 'Meat-eater') {
         throw new Error('Meat-eater is not allowed for this event.');
     }
 });
