@@ -11,6 +11,7 @@ const Attendance = require('./Attendance');
 const Image = require('./Image');
 const QuestionLine = require('./QuestionLine');
 const Question = require('./Question');
+const Incoming = require('./Incoming');
 
 Event.hasMany(Application, { foreignKey: 'event_id' });
 Event.hasMany(MembersList, { foreignKey: 'event_id' });
@@ -18,12 +19,14 @@ Event.hasMany(VotesPerAntenna, { foreignKey: 'event_id' });
 Event.hasMany(VotesPerDelegate, { foreignKey: 'event_id' });
 Event.hasMany(Position, { foreignKey: 'event_id' });
 Event.hasMany(Plenary, { foreignKey: 'event_id' });
+// Event.hasMany(Incoming, { foreignKey: 'event_id' });
 Application.belongsTo(Event, { foreignKey: 'event_id' });
 MembersList.belongsTo(Event, { foreignKey: 'event_id' });
 VotesPerAntenna.belongsTo(Event, { foreignKey: 'event_id' });
 VotesPerDelegate.belongsTo(Event, { foreignKey: 'event_id' });
 Position.belongsTo(Event, { foreignKey: 'event_id' });
 Plenary.belongsTo(Event, { foreignKey: 'event_id' });
+// Incoming.belongsTo(Event, { foreignKey: 'event_id' });
 
 Application.hasMany(VotesPerDelegate, { foreignKey: 'application_id' });
 VotesPerDelegate.belongsTo(Application, { foreignKey: 'application_id' });
@@ -49,6 +52,9 @@ QuestionLine.hasMany(Question, { foreignKey: 'question_line_id' });
 Application.hasMany(Question, { foreignKey: 'application_id' });
 Question.belongsTo(Application, { foreignKey: 'application_id' });
 
+// Application.hasOne(Incoming, { foreignKey: 'application_id' });
+// Incoming.belongsTo(Application, { foreignKey: 'application_id' });
+
 module.exports = {
     Event,
     Image,
@@ -63,4 +69,5 @@ module.exports = {
     Attendance,
     QuestionLine,
     Question,
+    Incoming,
 };
