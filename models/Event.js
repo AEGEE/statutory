@@ -433,7 +433,8 @@ const Event = sequelize.define('event', {
     },
     vegetarian: {
         type: Sequelize.BOOLEAN,
-        allowNull: false, // default value is set as 'false'
+        allowNull: false,
+        defaultValue: false,
     },
     image_id: {
         allowNull: true,
