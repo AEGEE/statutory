@@ -38,17 +38,17 @@ exports.generateEvent = (options = {}) => {
     if (notSet(options.url)) options.url = options.name.toLowerCase().replace(/ /g, '-').replace(/[^a-zA-Z0-9-]/g, '');
     if (notSet(options.description)) options.description = faker.lorem.paragraph();
     if (notSet(options.application_period_starts)) options.application_period_starts = faker.date.future();
-    if (notSet(options.application_period_ends)) options.application_period_ends = faker.date.future(null, options.application_period_starts);
-    if (notSet(options.board_approve_deadline)) options.board_approve_deadline = faker.date.future(null, options.application_period_ends);
-    if (notSet(options.participants_list_publish_deadline)) options.participants_list_publish_deadline = faker.date.future(null, options.board_approve_deadline);
-    if (notSet(options.memberslist_submission_deadline)) options.memberslist_submission_deadline = faker.date.future(null, options.participants_list_publish_deadline);
+    if (notSet(options.application_period_ends)) options.application_period_ends = faker.date.future({ refDate: options.application_period_starts });
+    if (notSet(options.board_approve_deadline)) options.board_approve_deadline = faker.date.future({ refDate: options.application_period_ends });
+    if (notSet(options.participants_list_publish_deadline)) options.participants_list_publish_deadline = faker.date.future({ refDate: options.board_approve_deadline });
+    if (notSet(options.memberslist_submission_deadline)) options.memberslist_submission_deadline = faker.date.future({ refDate: options.participants_list_publish_deadline });
     if (notSet(options.draft_proposal_deadline)) options.draft_proposal_deadline = faker.date.between(options.application_period_starts, options.memberslist_submission_deadline);
     if (notSet(options.final_proposal_deadline)) options.final_proposal_deadline = faker.date.between(options.draft_proposal_deadline, options.memberslist_submission_deadline);
     if (notSet(options.candidature_deadline)) options.candidature_deadline = faker.date.between(options.application_period_starts, options.memberslist_submission_deadline);
     if (notSet(options.booklet_publication_deadline)) options.booklet_publication_deadline = faker.date.between(options.application_period_starts, options.memberslist_submission_deadline);
     if (notSet(options.updated_booklet_publication_deadline)) options.updated_booklet_publication_deadline = faker.date.between(options.booklet_publication_deadline, options.memberslist_submission_deadline);
-    if (notSet(options.starts)) options.starts = faker.date.future(null, options.memberslist_submission_deadline);
-    if (notSet(options.ends)) options.ends = faker.date.future(null, options.starts);
+    if (notSet(options.starts)) options.starts = faker.date.future({ refDate: options.memberslist_submission_deadline });
+    if (notSet(options.ends)) options.ends = faker.date.future({ refDate: options.starts });
     if (notSet(options.fee)) options.fee = faker.number.int({ min: 0, max: 100 });
     if (notSet(options.body_id)) options.body_id = faker.number.int(100);
     if (notSet(options.type)) options.type = faker.helpers.arrayElement(['agora', 'epm']);
@@ -154,7 +154,7 @@ exports.generatePosition = (options = {}, event = null) => {
     if (notSet(options.starts)) options.starts = faker.date.past();
     if (notSet(options.ends)) options.ends = faker.date.future();
     if (notSet(options.deleted)) options.deleted = false;
-    if (notSet(options.start_term)) options.start_term = faker.date.future(null, options.ends);
+    if (notSet(options.start_term)) options.start_term = faker.date.future({ refDate: options.ends });
     if (notSet(options.end_term)) options.end_term = faker.lorem.sentence();
 
     if (event && event.id) {
@@ -223,7 +223,7 @@ exports.generateQuestion = (options = {}, questionLine = null) => {
 exports.generatePlenary = (options = {}, event = null) => {
     if (notSet(options.name)) options.name = faker.lorem.sentence();
     if (notSet(options.starts)) options.starts = faker.date.future();
-    if (notSet(options.ends)) options.ends = faker.date.future(null, options.starts);
+    if (notSet(options.ends)) options.ends = faker.date.future({ refDate: options.starts });
 
     if (event && event.id) {
         options.event_id = event.id;
@@ -234,7 +234,7 @@ exports.generatePlenary = (options = {}, event = null) => {
 
 exports.generateAttendance = (options = {}, plenary = null) => {
     if (notSet(options.starts)) options.starts = faker.date.future();
-    if (notSet(options.ends)) options.ends = faker.date.future(null, options.starts);
+    if (notSet(options.ends)) options.ends = faker.date.future({ refDate: options.starts });
 
     if (plenary && plenary.id) {
         options.plenary_id = plenary.id;
