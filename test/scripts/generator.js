@@ -1,4 +1,4 @@
-const faker = require('faker');
+const { faker } = require('@faker-js/faker');
 const moment = require('moment');
 
 const {
@@ -49,9 +49,9 @@ exports.generateEvent = (options = {}) => {
     if (notSet(options.updated_booklet_publication_deadline)) options.updated_booklet_publication_deadline = faker.date.between(options.booklet_publication_deadline, options.memberslist_submission_deadline);
     if (notSet(options.starts)) options.starts = faker.date.future(null, options.memberslist_submission_deadline);
     if (notSet(options.ends)) options.ends = faker.date.future(null, options.starts);
-    if (notSet(options.fee)) options.fee = faker.datatype.number({ min: 0, max: 100 });
-    if (notSet(options.body_id)) options.body_id = faker.datatype.number(100);
-    if (notSet(options.type)) options.type = faker.random.arrayElement(['agora', 'epm']);
+    if (notSet(options.fee)) options.fee = faker.number.int({ min: 0, max: 100 });
+    if (notSet(options.body_id)) options.body_id = faker.number.int(100);
+    if (notSet(options.type)) options.type = faker.helpers.arrayElement(['agora', 'epm']);
 
     if (notSet(options.questions)) {
         const questionsCount = Math.round(Math.random() * 5) + 1; // from 1 to 6
@@ -75,11 +75,11 @@ exports.generateQuestionForEvent = (options = {}) => {
 };
 
 exports.generateApplication = (options = {}, event = null) => {
-    if (notSet(options.user_id)) options.user_id = faker.datatype.number(100);
-    if (notSet(options.body_id)) options.body_id = faker.datatype.number(100);
+    if (notSet(options.user_id)) options.user_id = faker.number.int(100);
+    if (notSet(options.body_id)) options.body_id = faker.number.int(100);
     if (notSet(options.board_comment)) options.board_comment = faker.lorem.paragraph();
-    if (notSet(options.participant_type)) options.participant_type = faker.random.arrayElement(['delegate', 'visitor', 'observer', 'envoy']);
-    if (notSet(options.participant_order)) options.participant_order = faker.datatype.number({ min: 1, max: 100 });
+    if (notSet(options.participant_type)) options.participant_type = faker.helpers.arrayElement(['delegate', 'visitor', 'observer', 'envoy']);
+    if (notSet(options.participant_order)) options.participant_order = faker.number.int({ min: 1, max: 100 });
 
     // fields taken from application
     if (notSet(options.first_name)) options.first_name = faker.lorem.sentence();
@@ -95,8 +95,8 @@ exports.generateApplication = (options = {}, event = null) => {
         if (notSet(options[visaField])) options[visaField] = faker.lorem.sentence();
     }
 
-    if (notSet(options.meals)) options.meals = faker.random.arrayElement(['Vegetarian', 'Vegan']);
-    if (notSet(options.number_of_events_visited)) options.number_of_events_visited = faker.datatype.number({ min: 0, max: 100 });
+    if (notSet(options.meals)) options.meals = faker.helpers.arrayElement(['Vegetarian', 'Vegan']);
+    if (notSet(options.number_of_events_visited)) options.number_of_events_visited = faker.number.int({ min: 0, max: 100 });
 
     if (notSet(options.answers)) {
         const answersCount = event ? event.questions.length : Math.round(Math.random() * 5) + 1; // from 1 to 6
@@ -112,8 +112,8 @@ exports.generateApplication = (options = {}, event = null) => {
 
 exports.generateMembersList = (options = {}, event = null) => {
     if (notSet(options.currency)) options.currency = 'EU';
-    if (notSet(options.user_id)) options.user_id = faker.datatype.number(100);
-    if (notSet(options.body_id)) options.body_id = faker.datatype.number(100);
+    if (notSet(options.user_id)) options.user_id = faker.number.int(100);
+    if (notSet(options.body_id)) options.body_id = faker.number.int(100);
     if (notSet(options.members)) {
         const membersCount = Math.round(Math.random() * 5) + 1; // from 1 to 6
         options.members = Array.from({ length: membersCount }, (value, index) => exports.generateMembersListMember({
@@ -129,28 +129,28 @@ exports.generateMembersList = (options = {}, event = null) => {
 };
 
 exports.generateMembersListMember = (options = {}) => {
-    if (notSet(options.user_id)) options.user_id = faker.datatype.number(100);
-    if (notSet(options.first_name)) options.first_name = faker.name.firstName();
-    if (notSet(options.last_name)) options.last_name = faker.name.lastName();
-    if (notSet(options.fee)) options.fee = faker.datatype.number({ min: 1, max: 1000 });
+    if (notSet(options.user_id)) options.user_id = faker.number.int(100);
+    if (notSet(options.first_name)) options.first_name = faker.person.firstName();
+    if (notSet(options.last_name)) options.last_name = faker.person.lastName();
+    if (notSet(options.fee)) options.fee = faker.number.int({ min: 1, max: 1000 });
 
     return options;
 };
 
 exports.generatePaxLimit = (options = {}) => {
-    if (notSet(options.body_id)) options.body_id = faker.datatype.number(100);
-    if (notSet(options.delegate)) options.delegate = faker.datatype.number(100);
-    if (notSet(options.visitor)) options.visitor = faker.datatype.number(100);
-    if (notSet(options.observer)) options.observer = faker.datatype.number(100);
-    if (notSet(options.envoy)) options.envoy = faker.datatype.number(100);
-    if (notSet(options.event_type)) options.event_type = faker.random.arrayElement(['agora', 'epm']);
+    if (notSet(options.body_id)) options.body_id = faker.number.int(100);
+    if (notSet(options.delegate)) options.delegate = faker.number.int(100);
+    if (notSet(options.visitor)) options.visitor = faker.number.int(100);
+    if (notSet(options.observer)) options.observer = faker.number.int(100);
+    if (notSet(options.envoy)) options.envoy = faker.number.int(100);
+    if (notSet(options.event_type)) options.event_type = faker.helpers.arrayElement(['agora', 'epm']);
 
     return options;
 };
 
 exports.generatePosition = (options = {}, event = null) => {
     if (notSet(options.name)) options.name = faker.lorem.sentence();
-    if (notSet(options.places)) options.places = faker.datatype.number({ min: 1, max: 10 });
+    if (notSet(options.places)) options.places = faker.number.int({ min: 1, max: 10 });
     if (notSet(options.starts)) options.starts = faker.date.past();
     if (notSet(options.ends)) options.ends = faker.date.future();
     if (notSet(options.deleted)) options.deleted = false;
@@ -166,8 +166,8 @@ exports.generatePosition = (options = {}, event = null) => {
 
 // eslint-disable-next-line default-param-last
 exports.generateCandidate = (options = {}, position) => {
-    if (notSet(options.user_id)) options.user_id = faker.datatype.number({ min: 1, max: 100 });
-    if (notSet(options.body_id)) options.body_id = faker.datatype.number({ min: 1, max: 100 });
+    if (notSet(options.user_id)) options.user_id = faker.number.int({ min: 1, max: 100 });
+    if (notSet(options.body_id)) options.body_id = faker.number.int({ min: 1, max: 100 });
     if (notSet(options.first_name)) options.first_name = faker.lorem.sentence();
     if (notSet(options.last_name)) options.last_name = faker.lorem.sentence();
     if (notSet(options.email)) options.email = faker.internet.email();
@@ -177,7 +177,7 @@ exports.generateCandidate = (options = {}, position) => {
     if (notSet(options.body_name)) options.body_name = faker.lorem.sentence();
     if (notSet(options.languages)) {
         options.languages = Array.from(
-            { length: faker.datatype.number({ min: 1, max: 5 }) },
+            { length: faker.number.int({ min: 1, max: 5 }) },
             () => faker.lorem.sentence()
         );
     }
