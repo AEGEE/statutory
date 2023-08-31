@@ -28,6 +28,9 @@ const config = {
         memberslist_notification: [
             'treasurer@aegee.eu'
         ],
+        listserv_email: [
+          process.env.LISTSERV_EMAIL || 'listserv@example.com'
+        ],
         logger: {
             silent: false,
             level: process.env.LOGLEVEL || 'info'
