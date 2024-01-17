@@ -247,6 +247,7 @@ const Application = sequelize.define('application', {
             notEmpty: { msg: 'Last name should be set.' }
         }
     },
+    // TODO: this should be the notification_email from the user in core
     email: {
         allowNull: false,
         type: Sequelize.STRING,
@@ -452,6 +453,7 @@ Application.findWithParams = ({ where, attributes, query }) => {
         findAllObject.where[Sequelize.Op.or] = {
             first_name: { [Sequelize.Op.iLike]: '%' + query.query + '%' },
             last_name: { [Sequelize.Op.iLike]: '%' + query.query + '%' },
+            // TODO: figure out how to filter this if email is being fetched from core
             email: { [Sequelize.Op.iLike]: '%' + query.query + '%' }
         };
     }
