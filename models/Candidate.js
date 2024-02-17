@@ -51,15 +51,9 @@ const Candidate = sequelize.define('candidate', {
             notEmpty: { msg: 'Last name should be set.' }
         }
     },
-    // TODO: this should be the notification_email of the user
     email: {
         type: Sequelize.STRING,
-        allowNull: false,
-        defaultValue: '',
-        validate: {
-            notEmpty: { msg: 'Email should be set.' },
-            isEmail: { msg: 'Email should be valid.' }
-        }
+        allowNull: true
     },
     date_of_birth: {
         type: Sequelize.STRING,
