@@ -86,7 +86,6 @@ exports.generateApplication = (options = {}, event = null) => {
     if (notSet(options.last_name)) options.last_name = faker.lorem.sentence();
     if (notSet(options.gender)) options.gender = faker.lorem.sentence();
     if (notSet(options.body_name)) options.body_name = faker.lorem.sentence();
-    if (notSet(options.email)) options.email = faker.internet.email();
     if (notSet(options.notification_email)) options.notification_email = faker.internet.email();
 
     // visa fields

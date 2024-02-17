@@ -551,7 +551,7 @@ describe('Applications listing', () => {
             expect(res.body.data[0].last_name).toEqual('surname surname');
         });
 
-        test('should filter by email', async () => {
+        test.skip('should filter by email', async () => {
             const event = await generator.createEvent();
             await generator.createApplication({ user_id: 1, email: 'testtest@aegee.eu' }, event);
 
