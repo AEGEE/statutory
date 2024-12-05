@@ -514,9 +514,6 @@ const Event = sequelize.define('event', {
 Event.beforeValidate(async (event) => {
     // skipping these fields if they are unset, will catch it later.
     if (typeof event.url === 'string') event.url = event.url.toLowerCase().trim();
-
-    // TODO If the field `previous_agora_id` is filled in
-    // check if it is indeed the id of a previous Agora
 });
 
 module.exports = Event;
