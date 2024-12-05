@@ -1,5 +1,3 @@
-const moment = require('moment');
-
 const { startServer, stopServer } = require('../../lib/server');
 const { request } = require('../scripts/helpers');
 const mock = require('../scripts/mock-core-registry');
@@ -38,8 +36,9 @@ describe('Events previous_agora_id setting', () => {
         expect(res.statusCode).toEqual(200);
         expect(res.body.success).toEqual(true);
         expect(res.body).not.toHaveProperty('errors');
-        expect(res.body).toHaveProperty('previous_agora_id');
-        expect(res.body.previous_agora_id).toEqual(null);
+        expect(res.body).toHaveProperty('data');
+        expect(res.body.data).toHaveProperty('previous_agora_id');
+        expect(res.body.data.previous_agora_id).toEqual(null);
     });
 
     test('should set previous Agora correctly', async () => {
@@ -62,11 +61,12 @@ describe('Events previous_agora_id setting', () => {
         expect(res.statusCode).toEqual(200);
         expect(res.body.success).toEqual(true);
         expect(res.body).not.toHaveProperty('errors');
-        expect(res.bpdy).toHaveProperty('previous_agora_id');
-        expect(res.body.previous_agora_id).toEqual(1);
+        expect(res.body).toHaveProperty('data');
+        expect(res.body.data).toHaveProperty('previous_agora_id');
+        expect(res.body.data.previous_agora_id).toEqual(1);
     });
 
-    test('should set previous_agora_id as null if no previous Agora', async() => {
+    test('should set previous_agora_id as null if no previous Agora', async () => {
         const event = generator.generateEvent({
             type: 'agora'
         });
@@ -81,7 +81,8 @@ describe('Events previous_agora_id setting', () => {
         expect(res.statusCode).toEqual(200);
         expect(res.body.success).toEqual(true);
         expect(res.body).not.toHaveProperty('errors');
-        expect(res.bpdy).toHaveProperty('previous_agora_id');
-        expect(res.body.previous_agora_id).toEqual(null);
+        expect(res.body).toHaveProperty('data');
+        expect(res.body.data).toHaveProperty('previous_agora_id');
+        expect(res.body.data.previous_agora_id).toEqual(null);
     });
 });
