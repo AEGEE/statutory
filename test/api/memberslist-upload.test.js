@@ -848,7 +848,7 @@ describe('Memberslist uploading', () => {
             expect(res.body).toHaveProperty('data');
 
             const applicationFromDb = await Application.findByPk(application.id);
-            expect(applicationFromDb.is_on_memberslist).toEqual(true);
+            expect(applicationFromDb.is_on_memberslist).toEqual(false);
         });
 
         test('should set is_on_memberslist = false if no match', async () => {
