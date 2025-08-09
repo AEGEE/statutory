@@ -305,7 +305,7 @@ describe('Statistics testing', () => {
         expect(res.body.data.by_number_of_events_visited[2].type).toEqual(3);
     });
 
-    test('should calculate numbers properly if participant list publication is past', async () => {
+    test('should calculate numbers properly if participant list publication is in the past', async () => {
         event = await generator.createEvent({
             application_period_starts: moment().subtract(7, 'months').toDate(),
             application_period_ends: moment().subtract(6, 'months').toDate(),
