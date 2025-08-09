@@ -306,7 +306,12 @@ describe('Statistics testing', () => {
     });
 
     test('should calculate numbers properly if participant list publication is past', async () => {
-        event = await generator.createEvent({ participants_list_publish_deadline: moment().subtract(1, 'day').toDate() });
+        event = await generator.createEvent({
+            application_period_starts: moment().subtract(7, 'months').toDate(),
+            application_period_ends: moment().subtract(6, 'months').toDate(),
+            board_approve_deadline: moment().subtract(5, 'months').toDate(),
+            participants_list_publish_deadline: moment().subtract(4, 'months').toDate()
+        });
 
         await generator.createApplication({ user_id: 1, status: 'pending' }, event);
         await generator.createApplication({ user_id: 2, status: 'rejected' }, event);
