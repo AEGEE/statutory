@@ -50,7 +50,9 @@ describe('Applications creation', () => {
         expect(res.body.data.user_id).toEqual(regularUser.id);
     });
 
-    test('should succeed for a user with permissions but not within deadline', async () => {
+    test('should succeed for a user with apply permissions but not within deadline', async () => {
+        mock.mockAll({ mainPermissions: { applyPermissions: true } });
+
         const event = await generator.createEvent({ applications: [] });
         const application = generator.generateApplication({
             body_id: regularUser.bodies[0].id
