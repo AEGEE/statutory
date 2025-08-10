@@ -105,9 +105,7 @@ describe('Applications editing', () => {
     });
 
     test('should return 403 for user with apply permissions with an accepted application', async () => {
-        mock.mockAll({ mainPermissions: { applyPermissions: true } });
-
-        const event = await generator.createEvent();
+        const event = await generator.createEvent({ type: 'agora' });
         const application = await generator.createApplication({}, event);
 
         await request({
@@ -117,7 +115,9 @@ describe('Applications editing', () => {
             body: { status: 'accepted' }
         });
 
-        tk.travel(moment(event.application_period_starts).add(5, 'minutes').toDate());
+        tk.travel(moment(event.application_period_ends).add(5, 'minutes').toDate());
+
+        mock.mockAll({ mainPermissions: { applyPermissions: true } });
 
         const res = await request({
             uri: '/events/' + event.id + '/applications/' + application.id,
