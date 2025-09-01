@@ -22,7 +22,7 @@ describe('Pax limits single', () => {
         await generator.clearAll();
     });
 
-    test('should display default limit', async () => {
+    test('should display limit', async () => {
         const res = await request({
             uri: '/limits/agora/' + bodies[0].id,
             method: 'GET',
@@ -35,6 +35,19 @@ describe('Pax limits single', () => {
         expect(res.body).toHaveProperty('data');
 
         expect(res.body.data.default).toEqual(true);
+    });
+
+    test('should return 404 if defaults receives a body id', async () => {
+        const res = await request({
+            uri: '/limits/agora/defaults/' + bodies[0].id,
+            method: 'GET',
+            headers: { 'X-Auth-Token': 'blablabla' }
+        });
+
+        expect(res.statusCode).toEqual(404);
+        expect(res.body.success).toEqual(false);
+        expect(res.body).not.toHaveProperty('data');
+        expect(res.body).toHaveProperty('message');
     });
 
     test('should display custom limit', async () => {
