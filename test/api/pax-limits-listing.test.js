@@ -22,9 +22,28 @@ describe('Pax limits listing', () => {
         await generator.clearAll();
     });
 
-    test('should display default limits', async () => {
+    test('should display limits', async () => {
+        // Retrieve the updated limits
         const res = await request({
             uri: '/limits/agora',
+            method: 'GET',
+            headers: { 'X-Auth-Token': 'blablabla' }
+        });
+
+        expect(res.statusCode).toEqual(200);
+        expect(res.body.success).toEqual(true);
+        expect(res.body).not.toHaveProperty('errors');
+        expect(res.body).toHaveProperty('data');
+
+        for (const limit of res.body.data) {
+            expect(limit.default).toEqual(true);
+        }
+    });
+
+    test('should display default limits', async () => {
+        // Retrieve the default limits even if there are custom limits
+        const res = await request({
+            uri: '/limits/agora/defaults',
             method: 'GET',
             headers: { 'X-Auth-Token': 'blablabla' }
         });
