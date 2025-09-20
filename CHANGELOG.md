@@ -1,3 +1,45 @@
+## [1.14.6](https://github.com/AEGEE/statutory/compare/1.14.5...1.14.6) (2025-08-11)
+
+
+### Bug Fixes
+
+* **constants:** update URL to conversation rate API to https ([#1339](https://github.com/AEGEE/statutory/issues/1339)) ([ada7ace](https://github.com/AEGEE/statutory/commit/ada7aceb50afb1116eda8bfe5b0e81df1025abce))
+
+## [1.14.5](https://github.com/AEGEE/statutory/compare/1.14.4...1.14.5) (2025-08-10)
+
+
+### Bug Fixes
+
+* **applications:** only allow manage permission to edit accepted applications ([#1338](https://github.com/AEGEE/statutory/issues/1338)) ([2312002](https://github.com/AEGEE/statutory/commit/2312002ec0a02e5d757d124c835c4f45e689ec27))
+
+## [1.14.4](https://github.com/AEGEE/statutory/compare/1.14.3...1.14.4) (2025-08-09)
+
+
+### Bug Fixes
+
+* **candidates:** rename conferences to European Events ([#1334](https://github.com/AEGEE/statutory/issues/1334)) ([301f2a9](https://github.com/AEGEE/statutory/commit/301f2a9b6d470248a6ca116992f41bec1ee10cbe))
+
+## [1.14.3](https://github.com/AEGEE/statutory/compare/1.14.2...1.14.3) (2025-08-09)
+
+
+### Bug Fixes
+
+* **applications:** hide application status if before participant list publish date ([#1333](https://github.com/AEGEE/statutory/issues/1333)) ([062a3ab](https://github.com/AEGEE/statutory/commit/062a3ab9cb20ad8bd959be4d8b75b290380e4774))
+
+## [1.14.2](https://github.com/AEGEE/statutory/compare/1.14.1...1.14.2) (2025-03-12)
+
+
+### Bug Fixes
+
+* **application:** remove matching on name for members list check ([#1331](https://github.com/AEGEE/statutory/issues/1331)) ([97168ed](https://github.com/AEGEE/statutory/commit/97168ed786945eac040a0382a6e575802035f3df))
+
+## [1.14.1](https://github.com/AEGEE/statutory/compare/1.14.0...1.14.1) (2025-02-18)
+
+
+### Bug Fixes
+
+* update memberslist edit deadline. FIxes HELP-2676 ([#1324](https://github.com/AEGEE/statutory/issues/1324)) ([7716c8a](https://github.com/AEGEE/statutory/commit/7716c8a7a94281bde934296997d6d60d72c9c782))
+
 # [1.14.0](https://github.com/AEGEE/statutory/compare/1.13.1...1.14.0) (2024-12-05)
 
 

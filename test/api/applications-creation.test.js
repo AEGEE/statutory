@@ -50,13 +50,15 @@ describe('Applications creation', () => {
         expect(res.body.data.user_id).toEqual(regularUser.id);
     });
 
-    test('should succeed for a user with permissions but not within deadline', async () => {
-        const event = await generator.createEvent({ applications: [] });
+    test('should succeed for a user with apply permissions but not within deadline', async () => {
+        mock.mockAll({ mainPermissions: { applyPermissions: true } });
+
+        const event = await generator.createEvent({ applications: [], type: 'agora' });
         const application = generator.generateApplication({
             body_id: regularUser.bodies[0].id
         }, event);
 
-        tk.travel(moment(event.application_period_starts).subtract(5, 'minutes').toDate());
+        tk.travel(moment(event.application_period_ends).add(5, 'minutes').toDate());
 
         const res = await request({
             uri: '/events/' + event.id + '/applications/',
@@ -1307,7 +1309,7 @@ describe('Applications creation', () => {
             expect(applicationFromDb.is_on_memberslist).toEqual(true);
         });
 
-        test('should set is_on_memberslist = true if there\'s the first/last name match', async () => {
+        test('should set is_on_memberslist = false if there\'s the first/last name match', async () => {
             const event = await generator.createEvent({ type: 'agora' });
             await generator.createMembersList({
                 body_id: regularUser.bodies[0].id,
@@ -1336,7 +1338,7 @@ describe('Applications creation', () => {
             expect(res.body).toHaveProperty('data');
 
             const applicationFromDb = await Application.findByPk(res.body.data.id);
-            expect(applicationFromDb.is_on_memberslist).toEqual(true);
+            expect(applicationFromDb.is_on_memberslist).toEqual(false);
         });
     });
 
