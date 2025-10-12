@@ -66,7 +66,7 @@ describe('Pax limits defaults', () => {
     });
 
     test('should return an error if the default request returns net error', async () => {
-        mock.mockAll({ body: { netError: true } });
+        mock.mockAll({ bodies: { netError: true } });
         const res = await request({
             uri: '/limits/agora/defaults',
             method: 'GET',
