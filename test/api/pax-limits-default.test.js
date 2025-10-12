@@ -4,7 +4,7 @@ const mock = require('../scripts/mock-core-registry');
 const generator = require('../scripts/generator');
 const bodies = require('../assets/core-bodies.json').data;
 
-describe('Pax limits listing', () => {
+describe('Pax limits defaults', () => {
     beforeAll(async () => {
         await startServer();
     });
@@ -22,10 +22,10 @@ describe('Pax limits listing', () => {
         await generator.clearAll();
     });
 
-    test('should display limits', async () => {
-        // Retrieve the updated limits
+    test('should display default limits', async () => {
+        // Retrieve the default limits even if there are custom limits
         const res = await request({
-            uri: '/limits/agora',
+            uri: '/limits/agora/defaults',
             method: 'GET',
             headers: { 'X-Auth-Token': 'blablabla' }
         });
@@ -40,30 +40,22 @@ describe('Pax limits listing', () => {
         }
     });
 
-    test('should display custom limits', async () => {
-        for (const body of bodies) {
-            await generator.createPaxLimit({ body_id: body.id, event_type: 'agora' });
-        }
-
+    test('should return 404 if defaults receives a body id', async () => {
         const res = await request({
-            uri: '/limits/agora',
+            uri: '/limits/agora/defaults/' + bodies[0].id,
             method: 'GET',
             headers: { 'X-Auth-Token': 'blablabla' }
         });
 
-        expect(res.statusCode).toEqual(200);
-        expect(res.body.success).toEqual(true);
-        expect(res.body).not.toHaveProperty('errors');
-        expect(res.body).toHaveProperty('data');
-
-        for (const limit of res.body.data) {
-            expect(limit.default).toEqual(false);
-        }
+        expect(res.statusCode).toEqual(404);
+        expect(res.body.success).toEqual(false);
+        expect(res.body).not.toHaveProperty('data');
+        expect(res.body).toHaveProperty('message');
     });
 
     test('should return 400 if the event type is invalid', async () => {
         const res = await request({
-            uri: '/limits/invalid',
+            uri: '/limits/invalid/defaults/',
             method: 'GET',
             headers: { 'X-Auth-Token': 'blablabla' }
         });
@@ -74,10 +66,10 @@ describe('Pax limits listing', () => {
         expect(res.body).toHaveProperty('message');
     });
 
-    test('should return an error if the bodies request returns net error', async () => {
-        mock.mockAll({ bodies: { netError: true } });
+    test('should return an error if the default request returns net error', async () => {
+        mock.mockAll({ body: { netError: true } });
         const res = await request({
-            uri: '/limits/agora',
+            uri: '/limits/agora/defaults/',
             method: 'GET',
             headers: { 'X-Auth-Token': 'blablabla' }
         });
@@ -88,10 +80,10 @@ describe('Pax limits listing', () => {
         expect(res.body).toHaveProperty('message');
     });
 
-    test('should return an error if the bodies request returns malformed response', async () => {
+    test('should return an error if the default request returns malformed response', async () => {
         mock.mockAll({ bodies: { badResponse: true } });
         const res = await request({
-            uri: '/limits/agora',
+            uri: '/limits/agora/defaults',
             method: 'GET',
             headers: { 'X-Auth-Token': 'blablabla' }
         });
@@ -102,10 +94,10 @@ describe('Pax limits listing', () => {
         expect(res.body).toHaveProperty('message');
     });
 
-    test('should return an error if the bodies request returns unsuccessful response', async () => {
+    test('should return an error if the default request returns unsuccessful response', async () => {
         mock.mockAll({ bodies: { unsuccessfulResponse: true } });
         const res = await request({
-            uri: '/limits/agora',
+            uri: '/limits/agora/defaults',
             method: 'GET',
             headers: { 'X-Auth-Token': 'blablabla' }
         });
