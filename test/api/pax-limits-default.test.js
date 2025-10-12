@@ -23,7 +23,6 @@ describe('Pax limits defaults', () => {
     });
 
     test('should display default limits', async () => {
-        // Retrieve the default limits even if there are custom limits
         const res = await request({
             uri: '/limits/agora/defaults',
             method: 'GET',
@@ -55,7 +54,7 @@ describe('Pax limits defaults', () => {
 
     test('should return 400 if the event type is invalid', async () => {
         const res = await request({
-            uri: '/limits/invalid/defaults/',
+            uri: '/limits/invalid/defaults',
             method: 'GET',
             headers: { 'X-Auth-Token': 'blablabla' }
         });
@@ -69,7 +68,7 @@ describe('Pax limits defaults', () => {
     test('should return an error if the default request returns net error', async () => {
         mock.mockAll({ body: { netError: true } });
         const res = await request({
-            uri: '/limits/agora/defaults/',
+            uri: '/limits/agora/defaults',
             method: 'GET',
             headers: { 'X-Auth-Token': 'blablabla' }
         });

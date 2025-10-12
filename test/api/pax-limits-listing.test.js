@@ -23,7 +23,6 @@ describe('Pax limits listing', () => {
     });
 
     test('should display limits', async () => {
-        // Retrieve the updated limits
         const res = await request({
             uri: '/limits/agora',
             method: 'GET',
